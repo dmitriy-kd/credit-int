@@ -25,9 +25,6 @@ class Customer
     private int $age;
 
     #[Column(length: 255)]
-    private string $city;
-
-    #[Column(length: 255)]
     private string $region;
 
     #[Column(length: 255, unique: true)]
@@ -42,24 +39,27 @@ class Customer
     #[Column]
     private int $score;
 
+    #[Column]
+    private int $income;
+
     public function __construct(
         string $fullName,
         int $age,
-        string $city,
         string $region,
         string $pin,
         string $email,
         string $phone,
-        int $score
+        int $score,
+        int $income
     ) {
         $this->fullName = $fullName;
         $this->age = $age;
-        $this->city = $city;
         $this->region = $region;
         $this->pin = $pin;
         $this->email = $email;
         $this->phone = $phone;
         $this->score = $score;
+        $this->income = $income;
     }
 
     public function getId(): ?int
@@ -75,11 +75,6 @@ class Customer
     public function getAge(): int
     {
         return $this->age;
-    }
-
-    public function getCity(): string
-    {
-        return $this->city;
     }
 
     public function getRegion(): string
@@ -105,5 +100,10 @@ class Customer
     public function getScore(): int
     {
         return $this->score;
+    }
+
+    public function getIncome(): int
+    {
+        return $this->income;
     }
 }

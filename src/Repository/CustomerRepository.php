@@ -12,4 +12,11 @@ class CustomerRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Customer::class);
     }
+
+    public function save(Customer $customer): void
+    {
+        $em = $this->getEntityManager();
+        $em->persist($customer);
+        $em->flush();
+    }
 }
