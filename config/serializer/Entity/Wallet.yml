@@ -1,8 +1,0 @@
-App\Entity\Wallet:
-  attributes:
-    balance:
-      groups:
-        - api-wallet-get-balance
-    currency:
-      groups:
-        - api-wallet-get-balance

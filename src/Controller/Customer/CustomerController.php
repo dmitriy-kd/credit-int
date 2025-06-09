@@ -30,14 +30,14 @@ class CustomerController extends AbstractController
         try {
             $customer = $this->customerManager->createCustomer($customerDto);
 
-            return new JsonResponse($customer);
+            return $this->json($customer);
         } catch (Throwable $e) {
             $this->logger->critical($e->getMessage(), [
                 'trace' => $e->getTraceAsString()
             ]);
 
             return new JsonResponse(
-                ['error' => 'Unexpected error occurred, please try again later'],
+                ['Unexpected error occurred, please try again later'],
                 status: Response::HTTP_BAD_REQUEST
             );
         }

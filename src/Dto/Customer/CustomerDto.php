@@ -2,6 +2,8 @@
 
 namespace App\Dto\Customer;
 
+use App\Entity\Customer;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -10,6 +12,9 @@ use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\Sequentially;
 use Symfony\Component\Validator\Constraints\Type;
 
+#[UniqueEntity(fields: 'pin', message: 'There is already a customer with this pin', entityClass: Customer::class)]
+#[UniqueEntity(fields: 'email', message: 'There is already a customer with this email', entityClass: Customer::class)]
+#[UniqueEntity(fields: 'phone', message: 'There is already a customer with this phone', entityClass: Customer::class)]
 class CustomerDto
 {
     #[Sequentially([
@@ -22,7 +27,7 @@ class CustomerDto
     #[Sequentially([
         new NotBlank(),
         new Type('integer'),
-        new Range(min: 21, max: 60)
+        new Range(min: 0, max: 120)
     ])]
     public int $age;
 
@@ -56,7 +61,7 @@ class CustomerDto
     #[Sequentially([
         new NotBlank(),
         new Type('string'),
-        new Regex('|^+\d+|'),
+        new Regex('/^[+]\d+/'),
         new Length(min: 8, max: 14)
     ])]
     public string $phone;

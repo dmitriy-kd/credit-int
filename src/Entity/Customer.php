@@ -7,15 +7,11 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[Entity(repositoryClass: CustomerRepository::class)]
-#[UniqueEntity(fields: 'pin', message: 'There is already a customer with this pin')]
-#[UniqueEntity(fields: 'email,', message: 'There is already a customer with this email')]
-#[UniqueEntity(fields: 'phone', message: 'There is already a customer with this phone')]
 class Customer
 {
-    #[Id, GeneratedValue, Column]
+    #[Id, GeneratedValue(strategy: 'SEQUENCE'), Column]
     private int $id;
 
     #[Column(length: 255)]
